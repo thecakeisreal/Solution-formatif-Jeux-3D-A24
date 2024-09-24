@@ -7,6 +7,9 @@ using TMPro;
 /// </summary>
 public class ControleurTemps : MonoBehaviour
 {
+    /// <summary>
+    /// Gestion de l'instance unique
+    /// </summary>
     public static ControleurTemps Instance { get; private set; }
 
     [SerializeField, Tooltip("Vitesse la plus lente de la simulation")]
@@ -31,6 +34,7 @@ public class ControleurTemps : MonoBehaviour
 
     private void Awake()
     {
+        // Assure la présence dans la scène d'une seule instance
         if(Instance == null)
         {
             Instance = this;
@@ -43,9 +47,9 @@ public class ControleurTemps : MonoBehaviour
 
     private void Start()
     {
+        // Initialise le contrôle de UI et sa valeur
         curseurRatioTemps.onValueChanged.AddListener(ValeurTempsModifie);
         curseurRatioTemps.value = Mathf.InverseLerp(ratioMinimal, ratioMaximal, ratioTemps);
-        
     }
 
     /// <summary>
